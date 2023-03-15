@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         //http://localhost:8083/ratings/users/d083c5e1-8e9f-41ed-95e2-f041492c543e
         User user = userRepo.findById(userId).get();
         //invoking rating service to get rating of particular user by Userid
-        Rating[] ratingofUser = restTemplate.getForObject("http://localhost:8083/ratings/users/" + user.getId(), Rating[].class);
+        Rating[] ratingofUser = restTemplate.getForObject("http://RATING-SERVICE/ratings/users/" + user.getId(), Rating[].class);
 //        System.out.println(ratings.toString());
         List<Rating> ratings = Arrays.stream(ratingofUser).collect(Collectors.toList());
 
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
             System.out.println(rating.getHotelId());
             //invoke Hotel Service to get rating of particular user and map
             //http://localhost:8083/ratings/hotels/6cc93cac-3a49-408b-98d0-4ee5bf1290c7
-            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://localhost:8082/hotels/"+ rating.getHotelId(), Hotel.class);
+            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+ rating.getHotelId(), Hotel.class);
             Hotel hotel = forEntity.getBody();
             rating.setHotel(hotel);
             return rating;
