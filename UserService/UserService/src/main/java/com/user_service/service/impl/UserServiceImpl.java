@@ -5,6 +5,7 @@ import com.user_service.entites.Hotel;
 import com.user_service.entites.Rating;
 import com.user_service.entites.User;
 import com.user_service.external.service.FeignApiInvoker;
+import com.user_service.external.service.FeignRatinginvoker;
 import com.user_service.repo.UserRepo;
 import com.user_service.service.UserService;
 import org.slf4j.LoggerFactory;
@@ -32,16 +33,18 @@ public class UserServiceImpl implements UserService {
 //    private Logger logger = (Logger) LoggerFactory.getLogger(UserServiceImpl.class);
 
 
-    Rating rating;
+//    Rating rating;
 
     @Autowired
     FeignApiInvoker feignApiInvoker;
+
+    @Autowired
+    FeignRatinginvoker feignRatinginvoker;
 
     @Override
     public User saveUser(User user) {
         String randomId = UUID.randomUUID().toString();
         user.setId(randomId);
-        System.out.println(user);
         return userRepo.save(user);
     }
 
