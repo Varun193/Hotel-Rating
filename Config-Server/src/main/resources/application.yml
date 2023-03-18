@@ -1,0 +1,18 @@
+server:
+  port: 8085
+spring:
+  application.name: CONFIG-SERVER
+
+#  application:
+#    # name of the application
+#    name: application
+    # available profiles of the application
+  profiles:
+    active: dev
+
+  cloud:
+    config:
+      server:
+        git:
+        # git url where the configurations are stored
+          uri: https://github.com/Varun193/Hotel-Rating-MicroService-Config
