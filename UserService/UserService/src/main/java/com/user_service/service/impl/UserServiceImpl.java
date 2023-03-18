@@ -8,17 +8,13 @@ import com.user_service.external.service.FeignApiInvoker;
 import com.user_service.external.service.FeignRatinginvoker;
 import com.user_service.repo.UserRepo;
 import com.user_service.service.UserService;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
