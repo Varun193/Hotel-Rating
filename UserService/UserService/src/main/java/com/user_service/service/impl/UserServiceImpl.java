@@ -55,18 +55,19 @@ public class UserServiceImpl implements UserService {
 
         //http://localhost:8083/ratings/users/d083c5e1-8e9f-41ed-95e2-f041492c543e
         User user = userRepo.findById(userId).get();
+        System.out.println("user id is   " + user.getId());
         //invoking rating service to get rating of particular user by Userid
         Rating[] ratingofUser = restTemplate.getForObject("http://RATING-SERVICE/ratings/users/" + user.getId(), Rating[].class);
 //        System.out.println(ratings.toString());
         List<Rating> ratings = Arrays.stream(ratingofUser).collect(Collectors.toList());
 
         List<Rating> ratingList = ratings.stream().map(rating -> {
-            System.out.println(rating.getHotelId());
             //invoke Hotel Service to get rating of particular user and map
             //http://localhost:8083/ratings/hotels/6cc93cac-3a49-408b-98d0-4ee5bf1290c7
 //            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+ rating.getHotelId(), Hotel.class);
+            System.out.println("Hotel id is = " + rating.getHotelId());
             Hotel hotel = feignApiInvoker.getHotelByid(rating.getHotelId());
-            System.out.println(hotel);
+//            System.out.println(hotel);
 //            Hotel hotel = forEntity.getBody();
             rating.setHotel(hotel);
             return rating;
